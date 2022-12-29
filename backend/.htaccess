@@ -1,0 +1,25 @@
+
+php_flag display_errors on
+
+<Files ~ "\.(php)$"> 
+Deny from all 
+</Files>
+
+<Files "index.php"> 
+Allow from all 
+</Files>
+
+<IfModule mod_rewrite.c>
+RewriteBase /
+RewriteCond %{HTTP_HOST} (.*)
+RewriteCond %{REQUEST_URI} /$ [NC]
+RewriteRule ^(.*)(/)$ $1 [L,R=301]
+</IfModule>
+
+<IfModule mod_rewrite.c>
+RewriteEngine On
+RewriteBase /
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule . /index.php [L]
+</IfModule>
