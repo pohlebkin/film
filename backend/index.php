@@ -3,17 +3,17 @@ header( "Content-Type: text/html;charset=utf-8" );
 
 define( 'D_ROOT', $_SERVER['DOCUMENT_ROOT'] );
 
-$env = parse_ini_file(D_ROOT . '/.env');
+$GLOBALS['env'] = parse_ini_file(D_ROOT . '/.env');
 
-$connect = new mysqli(
-    $env['db_host'],
-    $env['db_user'],
-    $env['db_pass'],
-    $env['db_name']
+$GLOBALS['connect'] = new mysqli(
+    $GLOBALS['env']['db_host'],
+    $GLOBALS['env']['db_user'],
+    $GLOBALS['env']['db_pass'],
+    $GLOBALS['env']['db_name']
 );
 
-if( mysqli_character_set_name( $connect ) !== 'utf8mb4' ){
-    $connect->set_charset( 'utf8mb4' );
+if( mysqli_character_set_name( $GLOBALS['connect'] ) !== 'utf8mb4' ){
+    $GLOBALS['connect']->set_charset( 'utf8mb4' );
 }
 
 require_once D_ROOT . '/includes/function_db.php';
@@ -37,4 +37,4 @@ if( is_file( D_ROOT . '/url/' . URL1 . '/' . URL2 . '.php' ) ){
     exit;
 }
 
-print_error('неправильный запрос, урл пустой');
+print_error('неправильный запрос, урл ошибочный');
